@@ -56,37 +56,34 @@ let quotes = [
 	}
 ];
 
-// Get random number
-getRandomQuote = () => {
-	let randomNum = Math.floor(Math.random() * quotes.length);
-	return randomNum;
+// Get random quote
+getRandomQuote = array => {
+	let randomNum = Math.floor(Math.random() * array.length);
+	return array[randomNum];
 };
 
 // Print quote
 printQuote = () => {
 	// get random number
-	let randomNum = getRandomQuote();
+	let randomNum = getRandomQuote(quotes);
 	let txt = "";
 	let contentHTML = document.getElementById("quote-box");
 	// check if citation and year is undefined
-	if (
-		quotes[randomNum].citation == undefined ||
-		quotes[randomNum].year == undefined
-	) {
-		txt = `<p class="quote">${quotes[randomNum].quote}</p>
-    <p class="source">${quotes[randomNum].source}</p>`;
+	if (randomNum.citation == undefined || randomNum.year == undefined) {
+		txt = `<p class="quote">${randomNum.quote}</p>
+    <p class="source">${randomNum.source}</p>`;
 		// contentHTML.innerHTML = txt;
 		// body.style.color = quotes[randomNum].background;
-	} else if (quotes[randomNum].tags == undefined) {
-		txt = `<p class="quote">${quotes[randomNum].quote}</p>
-    <p class="source">${quotes[randomNum].source}<span class="citation">${quotes[randomNum].citation}</span><span class="year">${quotes[randomNum].year}</span></p>`;
+	} else if (randomNum.tags == undefined) {
+		txt = `<p class="quote">${randomNum.quote}</p>
+    <p class="source">${randomNum.source}<span class="citation">${randomNum.citation}</span><span class="year">${randomNum.year}</span></p>`;
 	} else {
-		txt = `<p class="quote">${quotes[randomNum].quote}</p>
-    <p class="source">${quotes[randomNum].source}<span class="citation">${quotes[randomNum].citation}</span><span class="year">${quotes[randomNum].year}</span><span class="tags"> -Tags: ${quotes[randomNum].tags}</span></p>`;
+		txt = `<p class="quote">${randomNum.quote}</p>
+    <p class="source">${randomNum.source}<span class="citation">${randomNum.citation}</span><span class="year">${randomNum.year}</span><span class="tags"> -Tags: ${randomNum.tags}</span></p>`;
 	}
 	// print and change background color
 	contentHTML.innerHTML = txt;
-	document.body.style.backgroundColor = quotes[randomNum].background;
+	document.body.style.backgroundColor = randomNum.background;
 };
 
 printQuote();
